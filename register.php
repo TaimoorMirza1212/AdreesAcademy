@@ -51,7 +51,7 @@
 <div class="page-wraper">
 	<div id="loading-icon-bx"></div>
 	<div class="account-form">
-		<div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
+		<div class="account-head" style="background-image:url(Adrees/s53.jpg);">
 			<a href="index.php"><img src="assets/images/1.png" style="height:7.5rem" alt=""></a>
 		</div>
 		<div class="account-form-inner">

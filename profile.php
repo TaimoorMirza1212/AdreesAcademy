@@ -12,7 +12,7 @@
         <!-- Content -->
         <div class="page-content bg-white">
             <!-- inner page banner -->
-            <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner1.jpg);">
+            <div class="page-banner ovbl-dark" style="background-image:url(Adrees/s43.jpg);">
                 <div class="container">
                     <div class="page-banner-entry">
                         <h1 class="text-white">Profile</h1>
@@ -38,10 +38,10 @@
                             <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
                                 <div class="profile-bx text-center">
                                     <div class="user-profile-thumb">
-                                        <img src="assets/images/profile/pic1.jpg" alt="" />
+                                        <img src="Adrees/teacher.jpeg" alt="" />
                                     </div>
                                     <div class="profile-info">
-                                        <h4>Mark Andre</h4>
+                                        <h4>Sir Adrees</h4>
                                         <span>mark.example@info.com</span>
                                     </div>
                                     <div class="profile-social">

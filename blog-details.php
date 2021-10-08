@@ -1,3 +1,9 @@
+
+<?php 
+
+$src=$_GET['src'];
+// echo $src;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head><!-- FAVICONS ICON ============================================= -->
@@ -12,7 +18,7 @@
     <!-- Content -->
     <div class="page-content bg-white">
         <!-- inner page banner -->
-        <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner2.jpg);">
+        <div class="page-banner ovbl-dark" style="background-image:url(Adrees/".<?php $src;?>);">
             <div class="container">
                 <div class="page-banner-entry">
                     <h1 class="text-white">Blog Details</h1>
@@ -38,7 +44,7 @@
 							<!-- blog start -->
 							<div class="recent-news blog-lg">
 								<div class="action-box blog-lg">
-									<img src="assets/images/blog/default/thum1.jpg" alt="">
+									<img src="Adrees/<?php echo $src;?>" alt="">
 								</div>
 								<div class="info-bx">
 									<ul class="media-post">

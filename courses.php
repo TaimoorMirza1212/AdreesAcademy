@@ -1,3 +1,12 @@
+<?php
+include 'partials/db_con.php';
+$id=$_GET['id'];
+// echo $id;
+// if(!isset($_GET['id'])){
+//     header('location:index.php');
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +23,7 @@
     <!-- Content -->
     <div class="page-content bg-white">
         <!-- inner page banner -->
-        <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner3.jpg);">
+        <div class="page-banner ovbl-dark" style="background-image:url(Adrees/s37.jpg);">
             <div class="container">
                 <div class="page-banner-entry">
                     <h1 class="text-white">Our Courses</h1>
@@ -25,7 +34,7 @@
 		<div class="breadcrumb-row">
 			<div class="container">
 				<ul class="list-inline">
-					<li><a href="#">Home</a></li>
+					<li><a href="idex.php">Home</a></li>
 					<li>Our Courses</li>
 				</ul>
 			</div>
@@ -49,11 +58,13 @@
 							<div class="widget widget_archive">
                                 <h5 class="widget-title style-1">All Courses</h5>
                                 <ul>
-                                    <li class="active"><a href="courses.php">General</a></li>
-                                    <li><a href="courses.php">IT & Software</a></li>
-                                    <li><a href="courses.php">Photography</a></li>
-                                    <li><a href="courses.php">Programming Language</a></li>
-                                    <li><a href="courses.php">Technology</a></li>
+								<?php
+                                    
+									$showcat=mysqli_query($con,'SELECT * FROM `course_categories` limit 0, 5');
+									while($row_showcat=mysqli_fetch_assoc($showcat)){
+										?>
+									<li><a href="courses.php?id=<?php echo $row_showcat['course_cat_id'];?>"><?php echo $row_showcat['course_cat_name'];?></a></li>
+									<?php } ?>
                                 </ul>
                             </div>
 							<div class="widget">
@@ -62,53 +73,47 @@
 							<div class="widget recent-posts-entry widget-courses">
                                 <h5 class="widget-title style-1">Recent Courses</h5>
                                 <div class="widget-post-bx">
+								<?php
+                                $recent_course_res=mysqli_query($con,'SELECT * FROM `course_info` ORDER by course_id DESC LIMIT 3');
+while ($recent_course_row=mysqli_fetch_assoc($recent_course_res)){?>
                                     <div class="widget-post clearfix">
-                                        <div class="ttr-post-media"> <img src="assets/images/blog/recent-blog/pic1.jpg" width="200" height="143" alt=""> </div>
+                                        <div class="ttr-post-media"> <img src="Adrees/Courses/<?php echo $recent_course_row['course_img'];?>" width="200" height="143" alt=""> </div>
                                         <div class="ttr-post-info">
                                             <div class="ttr-post-header">
-                                                <h6 class="post-title"><a href="courses-details.php">Introduction EduChamp</a></h6>
+                                                <h6 class="post-title"><a href="courses-details.php?id=<?php echo $recent_course_row['course_id'];?>"><?php echo $recent_course_row['course_name'];?></a></h6>
                                             </div>
                                             <div class="ttr-post-meta">
                                                 <ul>
                                                     <li class="price">
-														<del>$190</del>
-														<h5>$120</h5>
+														<del><?php echo $recent_course_row['course_price']."RS";?></del>
+														<h5><?php echo (int)($recent_course_row['course_price']-20.3)." RS";?></h5>
 													</li>
                                                     <li class="review">03 Review</li>
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="widget-post clearfix">
-                                        <div class="ttr-post-media"> <img src="assets/images/blog/recent-blog/pic3.jpg" width="200" height="160" alt=""> </div>
-                                        <div class="ttr-post-info">
-                                            <div class="ttr-post-header">
-                                                <h6 class="post-title"><a href="courses-details.php">English For Tommorow</a></h6>
-                                            </div>
-                                            <div class="ttr-post-meta">
-                                                <ul>
-                                                    <li class="price">
-														<h5 class="free">Free</h5>
-													</li>
-                                                    <li class="review">07 Review</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div><?php }?>
+                                    
                                 </div>
                             </div>
 						</div>
 						<div class="col-lg-9 col-md-8 col-sm-12">
 							<div class="row">
+							<?php
+                                     $show_course=mysqli_query($con,'SELECT course_categories.*,course_info.* FROM `course_info` INNER JOIN course_categories on course_info.course_fk=course_categories.course_cat_id WHERE course_info.course_fk='.$id);
+									 if(mysqli_num_rows($show_course)>0){
+									 while($showcourse_row=mysqli_fetch_assoc($show_course)){
+									
+										?>
 								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
 									<div class="cours-bx">
 										<div class="action-box">
-											<img src="assets/images/courses/pic1.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
+											<img src="Adrees/Courses/<?php echo $showcourse_row['course_img'];?>" alt="">
+											<a href="courses-details.php?id=<?php echo $showcourse_row['course_id'];?>" class="btn">Read More</a>
 										</div>
 										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
+											<h5><a href="courses-details.php?id=<?php echo $showcourse_row['course_id'];?>"><?php echo $showcourse_row['course_name'];?></a></h5>
+											<span><?php echo $showcourse_row['course_cat_name'];?></span>
 										</div>
 										<div class="cours-more-info">
 											<div class="review">
@@ -122,237 +127,16 @@
 												</ul>
 											</div>
 											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
+											<del><?php echo $showcourse_row['course_price']." RS";?></del>
+                                                <h5><?php echo (int)($showcourse_row['course_price']-20.3)." RS";?></h5>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic2.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic3.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic4.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic5.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic6.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic7.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic8.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-									<div class="cours-bx">
-										<div class="action-box">
-											<img src="assets/images/courses/pic9.jpg" alt="">
-											<a href="courses-details.php" class="btn">Read More</a>
-										</div>
-										<div class="info-bx text-center">
-											<h5><a href="courses-details.php">Introduction EduChamp – LMS plugin</a></h5>
-											<span>Programming</span>
-										</div>
-										<div class="cours-more-info">
-											<div class="review">
-												<span>3 Review</span>
-												<ul class="cours-star">
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li class="active"><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i></li>
-												</ul>
-											</div>
-											<div class="price">
-												<del>$190</del>
-												<h5>$120</h5>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-12 m-b20">
+								</div><?php }} else{
+									echo "<h3>Comming Soon!</h3>";
+								} ?>
+								
+								<!-- <div class="col-lg-12 m-b20">
 									<div class="pagination-bx rounded-sm gray clearfix">
 										<ul class="pagination">
 											<li class="previous"><a href="#"><i class="ti-arrow-left"></i> Prev</a></li>
@@ -362,7 +146,7 @@
 											<li class="next"><a href="#">Next <i class="ti-arrow-right"></i></a></li>
 										</ul>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>

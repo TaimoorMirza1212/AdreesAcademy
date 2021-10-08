@@ -13,10 +13,10 @@
         <!-- Inner Content Box ==== -->
         <div class="page-content">
             <!-- Page Heading Box ==== -->
-            <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner2.jpg);">
+            <div class="page-banner ovbl-dark" style="background-image:url(Adrees/s27.jpg);">
                 <div class="container">
                     <div class="page-banner-entry">
-                        <h1 class="text-white">About Us 1</h1>
+                        <h1 class="text-white">About Us</h1>
                     </div>
                 </div>
             </div>
@@ -96,8 +96,7 @@
                             </div>
                             <div class="col-lg-7 col-md-12 heading-bx p-lr">
                                 <div class="video-bx">
-                                    <img src="assets/images/about/pic1.jpg" alt="" />
-                                    <a href="https://www.youtube.com/watch?v=x_sJzVe9P_8" class="popup-youtube video"><i class="fa fa-play"></i></a>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/k-byWemRgFA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +146,7 @@
                 </div>
                 <!-- Our Status END ==== -->
                 <!-- About Content ==== -->
-                <div class="section-area section-sp2 bg-fix ovbl-dark join-bx text-center" style="background-image:url(assets/images/background/bg1.jpg);">
+                <div class="section-area section-sp2 bg-fix ovbl-dark join-bx text-center" style="background-image:url(Adrees/s8.jpg);">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">

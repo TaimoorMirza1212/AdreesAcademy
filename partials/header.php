@@ -1,3 +1,7 @@
+<?php
+include 'partials/db_con.php'; 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +55,49 @@
     <link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/settings.css">
     <link rel="stylesheet" type="text/css" href="assets/vendors/revolution/css/navigation.css">
     <!-- REVOLUTION SLIDER END -->
+    <style>
+/* top-bar */
+.header {
+    background:rgba(2, 0, 11, 0.6)!important;
+}
+
+        /* Slider */
+        div#slide-100-layer-1,div#slide-200-layer-1 {
+            background:rgba(2, 0, 11, 0.4)!important;
+        }
+        /* services */
+        .service-bx .action-box img{
+            height:15rem;
+            width:100%;
+            margin:0 auto;
+        }
+/* popular courses */
+.item .cours-bx .action-box img{
+    height:10rem;
+            width:100%;
+            margin:0 auto;
+}
+/* event images */
+.event-bx .action-box img{
+    height:15rem;
+            width:100%;
+            margin:0 auto;
+}
+.blog-post.blog-md.clearfix .ttr-post-media img{
+    height:15rem;
+            width:100%;
+            margin:0 auto;
+}
+/* testimonial img */
+.testimonial-thumb img{
+    height: 80px!important;
+    width:100%;
+    margin:0 auto;
+    border-radius:50%;
+}
+
+
+    </style>
 </head>
 <body>
         <!-- Header Top ==== -->
@@ -67,10 +114,10 @@
                         <div class="topbar-right">
                             <ul>
                                 <li>
-                                    <select class="header-lang-bx">
+                                    <!-- <select class="header-lang-bx">
 									<option data-icon="flag flag-uk">English UK</option>
 									<option data-icon="flag flag-us">English US</option>
-								</select>
+								</select> -->
                                 </li>
                                 <li><a href="login.php">Login</a></li>
                                 <li><a href="register.php">Register</a></li>
@@ -96,7 +143,7 @@
                         <div class="secondary-menu">
                             <div class="secondary-inner">
                                 <ul>
-                                    <li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://www.facebook.com/siradrees" class="btn-link"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
                                     <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
                                     <!-- Search Button ==== -->
@@ -118,9 +165,9 @@
                                 <a href="index.php"><img src="assets/images/1.png" alt=""></a>
                             </div>
                             <ul class="nav navbar-nav">
-                                <li class="active"  > <span> <a href="index.php" class="no-drop-down" style="color:blue">Home</a></span></li>
+                                <li class="active"  > <a href="index.php" class="no-drop-down" >Home</a></li>
 
-                                <li><a href="about-1.php">About</i></a>
+                                <li><a href="about-1.php" class="no-drop-down">About</i></a>
                                 </li>
 
                                 <!-- <li><a href="javascript:;">FAQ's</a>
@@ -130,7 +177,7 @@
                                             </ul>
                                         </li> -->
                                 <li>
-                                    <a href="contact-1.php">Contact Us</a>
+                                    <a href="contact-1.php" class="no-drop-down">Contact Us</a>
                                 </li>
                                 <!-- <ul class="sub-menu">
                                                 <li><a href="contact-1.php">Contact Us 1</a></li>
@@ -143,20 +190,19 @@
                                         <li><a href="error-404.php">404 Page</a></li>
                                     </ul> -->
 
-                                <li class="add-mega-menu"><a href="courses.php">Our Courses </a>
+                                <li class="add-mega-menu onmenu"><a >Our Courses </a>
                                 <ul class="sub-menu add-menu">
 									<li class="add-menu-left">
 										<h5 class="menu-adv-title">Our Courses</h5>
 										<ul>
-                                        <li><a href="courses.php">IT & Software</a></li>
-                                    <li><a href="courses.php">Photography</a></li>
-                                    <li><a href="courses.php">Programming Language</a></li>
-                                    <li><a href="courses.php">Technology</a></li>
-                                    <li><a href="courses.php">IT & Software</a></li>
-                                    <li><a href="courses.php">Photography</a></li>
-                                    <li><a href="courses.php">Programming Language</a></li>
-                                    <li><a href="courses.php">Technology</a></li>
+                                        <?php
                                     
+	                                    $res1=mysqli_query($con,'SELECT * FROM `course_categories` limit 0, 5');
+	                                    while($row=mysqli_fetch_assoc($res1)){
+                                            ?>
+                                        <li><a href="courses.php?id=<?php echo $row['course_cat_id'];?>"><?php echo $row['course_cat_name'];?></a></li>
+                                        <?php } ?>
+                                   
                                     
 										</ul>
 
@@ -164,15 +210,18 @@
 									<li class="add-menu-right">
 										<img src="assets/images/adv/adv.jpg" alt=""/>
                                         <ul>
-                                        <li><a href="courses.php">IT & Software</a></li>
-                                    <li><a href="courses.php">Photography</a></li>
-                                    <li><a href="courses.php">Programming Language</a></li>
-                                    <li><a href="courses.php">Technology</a></li>
+                                        <?php
+                                    
+	                                    $res1=mysqli_query($con,'SELECT * FROM `course_categories` limit 5, 5');
+	                                    while($row=mysqli_fetch_assoc($res1)){
+                                            ?>
+                                        <li><a href="courses.php?id=<?php echo $row['course_cat_id'];?>"><?php echo $row['course_cat_name'];?></a></li>
+                                        <?php } ?>
 										</ul>
 									</li>
 								</ul>         
                             </li>
-                                <li><a href="javascript:;">Blog </a>
+                                <li class="onmenu"><a href="javascript:;">Blog </a>
                                     <ul class="sub-menu">
                                         <li><a href="blog-list-sidebar.php">Technology Blog</a></li>
                                         <li><a href="blog-list-sidebar.php">Security Sidebar</a></li>
@@ -180,6 +229,12 @@
                                         <li><a href="blog-list-sidebar.php">Blog Standard Sidebar</a></li>
                                         <li><a href="blog-list-sidebar.php">Blog Details</a></li>
                                     </ul>
+                                </li>
+                                <li>
+                                    <a href="commingsoon.php">Donate</a>
+                                </li>
+                                <li>
+                                    <a href="commingsoon.php">Gallery</a>
                                 </li>
                                 <!-- <li class="nav-dashboard"><a href="javascript:;">Dashboard </a>
                                     <ul class="sub-menu">
@@ -212,5 +267,8 @@
             </div>
         </header>
         <!-- Header Top END ==== -->
+        
+<!-- Loader -->
+        <!-- <div id="loading-icon-bx"></div> -->
 </body>
 </html>

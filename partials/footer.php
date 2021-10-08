@@ -67,10 +67,13 @@
                                     <div class="widget footer_widget">
                                         <h5 class="footer-title">Courses</h5>
                                         <ul>
-                                        <li><a href="courses.php">IT & Software</a></li>
-                                    <li><a href="courses.php">Photography</a></li>
-                                    <li><a href="courses.php">Programming </a></li>
-                                    <li><a href="courses.php">Technology</a></li>
+                                        <?php
+                                    
+                                    $res1=mysqli_query($con,'SELECT * FROM `course_categories` limit 5, 4');
+                                    while($row=mysqli_fetch_assoc($res1)){
+                                        ?>
+                                    <li><a href="courses.php?id=<?php echo $row['course_cat_id'];?>"><?php echo $row['course_cat_name'];?></a></li>
+                                    <?php } ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -81,28 +84,28 @@
                                 <h5 class="footer-title">Our Gallery</h5>
                                 <ul class="magnific-image">
                                     <li>
-                                        <a href="assets/images/gallery/pic1.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic1.jpg" alt=""></a>
+                                        <a href="Adrees/s5.jpg" class="magnific-anchor"><img src="Adrees/s5.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic2.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic2.jpg" alt=""></a>
+                                        <a href="Adrees/s6.jpg" class="magnific-anchor"><img src="Adrees/s6.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic3.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic3.jpg" alt=""></a>
+                                        <a href="Adrees/s7.jpg" class="magnific-anchor"><img src="Adrees/s7.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic4.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic4.jpg" alt=""></a>
+                                        <a href="Adrees/s8.jpg" class="magnific-anchor"><img src="Adrees/s8.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic5.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic5.jpg" alt=""></a>
+                                        <a href="Adrees/s9.jpg" class="magnific-anchor"><img src="Adrees/s9.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic6.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic6.jpg" alt=""></a>
+                                        <a href="Adrees/s10.jpg" class="magnific-anchor"><img src="Adrees/s10.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic7.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic7.jpg" alt=""></a>
+                                        <a href="Adrees/s11.jpg" class="magnific-anchor"><img src="Adrees/s11.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                     <li>
-                                        <a href="assets/images/gallery/pic8.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic8.jpg" alt=""></a>
+                                        <a href="Adrees/s12.jpg" class="magnific-anchor"><img src="Adrees/s12.jpg" alt="" style="height: 4.2rem;"></a>
                                     </li>
                                 </ul>
                             </div>
